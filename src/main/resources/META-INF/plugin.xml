@@ -1,18 +1,58 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>org.jetbrains.plugins.template</id>
-    <name>IntelliJ Platform Plugin Template</name>
-    <vendor>JetBrains</vendor>
+    <id>com.github.dnsv.relativeactions</id>
+    <name>Relative Actions</name>
+    <vendor url="https://github.com/dnsv/relative-actions">dnsv</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <resource-bundle>messages.MyBundle</resource-bundle>
-
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="org.jetbrains.plugins.template.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+        <applicationService serviceImplementation="com.github.dnsv.relativeactions.settings.AppSettings"/>
+
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.github.dnsv.relativeactions.settings.AppSettingsConfigurable"
+                id="com.github.dnsv.relativeactions.settings.AppSettingsConfigurable"
+                displayName="Relative Actions"/>
+
+        <editorActionHandler
+                action="EditorEscape"
+                order="first"
+                implementationClass="com.github.dnsv.relativeactions.handler.EscapeHandler"
+                id="RelativeActionEscapeHandler"/>
+
+        <editorActionHandler
+                action="EditorBackSpace"
+                order="first"
+                implementationClass="com.github.dnsv.relativeactions.handler.BackSpaceHandler"
+                id="RelativeActionBackSpaceHandler"/>
+
+        <editorActionHandler
+                action="EditorEnter"
+                order="first"
+                implementationClass="com.github.dnsv.relativeactions.handler.PreventHandler"
+                id="RelativeActionEnterHandler"/>
+
+        <editorActionHandler
+                action="EditorTab"
+                order="first"
+                implementationClass="com.github.dnsv.relativeactions.handler.PreventHandler"
+                id="RelativeActionTabHandler"/>
+
+        <editorActionHandler
+                action="EditorUnindentSelection"
+                order="first"
+                implementationClass="com.github.dnsv.relativeactions.handler.PreventHandler"
+                id="RelativeActionEditorUnindentSelectionHandler"/>
+
+        <notificationGroup id="relative-actions" displayType="BALLOON"/>
     </extensions>
 
-    <applicationListeners>
-        <listener class="org.jetbrains.plugins.template.listeners.MyApplicationActivationListener" topic="com.intellij.openapi.application.ApplicationActivationListener"/>
-    </applicationListeners>
+    <actions>
+        <action id="ActivateRelativeActions"
+                class="com.github.dnsv.relativeactions.action.ActivateAction"
+                text="Activate Relative Actions">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt K"/>
+        </action>
+    </actions>
 </idea-plugin>

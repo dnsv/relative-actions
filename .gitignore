@@ -1,5 +1,16 @@
-.gradle
-.idea
+# IntelliJ
+/.idea/*
+!/.idea/gradle.xml
+!/.idea/icon.svg
 .intellijPlatform
+
+# Qodana
 .qodana
+
+# Gradle
+.gradle
 build
+.kotlin
+
+# Mac OS
+.DS_Store
