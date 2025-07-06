@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Add warnings for invalid commands ([#3](https://github.com/dnsv/relative-actions/pull/3))
+
 ## [1.0.0] - 2025-06-29
 
 ### Added
