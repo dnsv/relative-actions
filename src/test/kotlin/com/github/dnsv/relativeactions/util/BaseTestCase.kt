@@ -1,5 +1,7 @@
 package com.github.dnsv.relativeactions.util
 
+import com.intellij.notification.ActionCenter
+import com.intellij.notification.Notification
 import com.intellij.openapi.application.PathManager
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.LogicalPosition
@@ -48,6 +50,8 @@ abstract class BaseTestCase {
     protected fun getEditor(): Editor = myFixture.editor
 
     protected fun simulateTyping(input: String) = input.forEach { char -> myFixture.type(char) }
+
+    protected fun getLastNotification(): Notification = ActionCenter.getNotifications(myFixture.project).last()
 
     protected fun performCommand(command: String) {
         myFixture.performEditorAction("ActivateRelativeActions")

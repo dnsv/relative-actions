@@ -6,6 +6,7 @@ import com.intellij.lang.LanguageCommenters
 import com.intellij.openapi.editor.LogicalPosition
 import com.intellij.openapi.fileTypes.PlainTextLanguage
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.CsvSource
@@ -141,6 +142,7 @@ class RelativeActionCommentTest : BaseTestCase() {
         assertCaretPosition(expectedPosition)
     }
 
+    @Test
     fun `test comment text one line shortcut`() {
         makeEditor("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n")
         moveCaret(LogicalPosition(4, 0)) // At "5\n"

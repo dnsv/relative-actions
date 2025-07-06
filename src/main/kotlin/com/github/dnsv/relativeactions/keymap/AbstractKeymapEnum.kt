@@ -11,6 +11,8 @@ abstract class AbstractKeymapEnum<T : Enum<T>> {
 
     fun getValue(key: Char): T = getKeymap().getValue(key)
 
+    fun getKey(value: T): Char? = getKeymap().entries.firstOrNull { it.value == value }?.key
+
     fun invalidateCache() {
         keymapCache = null
     }
