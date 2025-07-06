@@ -2,25 +2,22 @@ package com.github.dnsv.relativeactions.util
 
 import com.intellij.notification.NotificationGroupManager
 import com.intellij.notification.NotificationType
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 
-object NotificationService {
+object Notify {
     const val NOTIFICATION_TITLE = "Relative Actions"
 
     private val notificationGroup = NotificationGroupManager.getInstance().getNotificationGroup("relative-actions")
 
-    fun info(
-        project: Project?,
+    fun warning(
+        editor: Editor,
         message: String,
-    ) {
-        createNotification(project, message, NotificationType.INFORMATION)
-    }
+    ) = createNotification(editor.project, message, NotificationType.WARNING)
 
     private fun createNotification(
         project: Project?,
         message: String,
         type: NotificationType,
-    ) {
-        notificationGroup.createNotification(NOTIFICATION_TITLE, message, type).notify(project)
-    }
+    ) = notificationGroup.createNotification(NOTIFICATION_TITLE, message, type).notify(project)
 }

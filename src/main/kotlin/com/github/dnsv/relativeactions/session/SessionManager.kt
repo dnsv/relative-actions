@@ -1,6 +1,6 @@
 package com.github.dnsv.relativeactions.session
 
-import com.github.dnsv.relativeactions.util.NotificationService
+import com.github.dnsv.relativeactions.util.Notify
 import com.intellij.openapi.editor.Editor
 
 /**
@@ -9,13 +9,11 @@ import com.intellij.openapi.editor.Editor
 object SessionManager : SessionListener {
     private var session: Session? = null
 
-    override fun onSessionEnd() {
-        end()
-    }
+    override fun onSessionEnd() = end()
 
     fun start(editor: Editor) {
         if (editor.caretModel.caretCount > 1) {
-            NotificationService.info(editor.project, "Relative Actions can't run while multiple carets are active.")
+            Notify.warning(editor, "Relative Actions can't run while multiple carets are active.")
             return
         }
 
@@ -24,9 +22,7 @@ object SessionManager : SessionListener {
         session = Session(editor, this)
     }
 
-    fun restart(editor: Editor) {
-        start(editor)
-    }
+    fun restart(editor: Editor) = start(editor)
 
     fun end() {
         session?.dispose()
