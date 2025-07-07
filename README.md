@@ -2,7 +2,7 @@
     <img alt="Logo" src="./src/main/resources/META-INF/pluginIcon.svg" width="80">
     <h1>Relative Actions</h1>
 
-![Build](https://github.com/dnsv/relative-actions/workflows/Build/badge.svg)
+![Build](https://github.com/dnsv/relative-actions/actions/workflows/build.yml/badge.svg?branch=main)
 </div>
 
 **Relative Actions** is a plugin for IntelliJ-based IDEs to perform actions (move, copy, cut, delete, select
