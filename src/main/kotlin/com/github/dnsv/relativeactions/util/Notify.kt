@@ -6,7 +6,7 @@ import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.project.Project
 
 object Notify {
-    const val NOTIFICATION_TITLE = "Relative Actions"
+    private const val NOTIFICATION_TITLE = "Relative Actions"
 
     private val notificationGroup = NotificationGroupManager.getInstance().getNotificationGroup("relative-actions")
 
