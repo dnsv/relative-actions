@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Update copy action to temporarily highlight copied text ([#11](https://github.com/dnsv/relative-actions/pull/11))
+
 ## [1.1.0] - 2025-07-06
 
 - Add warnings for invalid commands ([#3](https://github.com/dnsv/relative-actions/pull/3))
