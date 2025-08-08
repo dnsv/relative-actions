@@ -9,8 +9,8 @@ import com.intellij.openapi.editor.markup.HighlighterTargetArea
 import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.openapi.ide.CopyPasteManager
 import com.intellij.openapi.util.TextRange
+import com.intellij.util.Alarm
 import java.awt.datatransfer.StringSelection
-import javax.swing.Timer
 
 class CopyRelativeAction(
     editor: Editor,
@@ -55,11 +55,8 @@ class CopyRelativeAction(
             )
 
         // Remove highlight after a short delay
-        Timer(HIGHLIGH_DURATION_MS) {
+        Alarm().addRequest({
             editor.markupModel.removeHighlighter(highlighter)
-        }.apply {
-            isRepeats = false
-            start()
-        }
+        }, HIGHLIGH_DURATION_MS)
     }
 }
