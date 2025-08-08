@@ -41,8 +41,15 @@ You can now perform a command relative to your current line. Commands follow a s
 - **Move to the beginning/end of a line**: Also specify a position (e.g., `3ek` to move 3 lines up and to the end of the
   line).
 - **Perform an action**: Specify a line number, action and direction (e.g., `3ck` to comment 3 lines up).
-- **Work with ranges**: Use a comma to specify a range of lines (e.g., `2,5dl` to delete from lines 2 through 5 below
+- **Work with ranges**: Use a comma to specify a range of lines (e.g., `2,5dl` to delete lines 2 through 5 below
   the current line).
+
+More examples:
+- `6l`: Move 6 lines down
+- `3dl`: Delete 3 lines down
+- `10,5sk` Select lines 5 through 10 above the current line
+- `5,cl`: Comment only the 5th line below the current line
+- `3,5xb`: Cut 3 lines above and 5 below the current line
 
 > [!NOTE]
 > You can customize the activation shortcut under `Settings > Keymap` by searching for `Relative Actions`.
