@@ -2,6 +2,8 @@ package com.github.dnsv.relativeactions
 
 import com.github.dnsv.relativeactions.util.BaseTestCase
 import com.intellij.openapi.editor.LogicalPosition
+import com.intellij.testFramework.PlatformTestUtil
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
@@ -72,5 +74,31 @@ class RelativeActionCopyTest : BaseTestCase() {
         performCommand("3,yk")
 
         assertClipboard("2\n")
+    }
+
+    @Test
+    fun `test copied text is temporarily highlighted`() {
+        makeEditor("1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n")
+        moveCaret(LogicalPosition(4, 0)) // At "5\n"
+
+        // Copy 3 lines down
+        performCommand("y3l")
+
+        val editor = getEditor()
+        val highlighters = editor.markupModel.allHighlighters.toList()
+
+        Assertions.assertEquals(1, highlighters.size)
+
+        val highlighter = highlighters.first()
+        val highlightedText = editor.document.text.substring(highlighter.startOffset, highlighter.endOffset)
+
+        Assertions.assertEquals("5\n6\n7\n8\n", highlightedText)
+        assertClipboard(highlightedText)
+
+        // Check that the highlight is removed after a short delay
+        PlatformTestUtil.waitForAlarm(150)
+        val highlightersAfter = editor.markupModel.allHighlighters.toList()
+
+        Assertions.assertEquals(0, highlightersAfter.size)
     }
 }

@@ -11,7 +11,6 @@ kover = "0.9.1"
 qodana = "2025.1.1"
 ktlint = "13.0.0"
 
-
 [libraries]
 junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
 junit5-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit5" }
