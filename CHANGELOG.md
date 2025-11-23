@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Fix settings not being persisted ([#34](https://github.com/dnsv/relative-actions/pull/34))
+
 ## [1.2.0] - 2025-08-08
 
 - Update copy action to temporarily highlight copied text ([#11](https://github.com/dnsv/relative-actions/pull/11))
