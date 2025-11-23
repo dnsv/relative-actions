@@ -2,69 +2,122 @@
 
 package com.github.dnsv.relativeactions.settings
 
-import com.intellij.openapi.components.*
-import com.intellij.ui.JBColor
+import com.intellij.openapi.components.SerializablePersistentStateComponent
+import com.intellij.openapi.components.Service
+import com.intellij.openapi.components.State
+import com.intellij.openapi.components.Storage
+import com.intellij.util.xmlb.Converter
+import com.intellij.util.xmlb.annotations.OptionTag
 import java.awt.Color
 
-@State(name = "RelativeActionsSettings", storages = [(Storage("relative-actions.xml"))])
-class AppSettings : PersistentStateComponent<AppSettings.State> {
-    companion object {
-        @JvmStatic
-        fun getInstance(): AppSettings = service()
-    }
-
-    val caretBackground
+@Service()
+@State(name = "RelativeActionsSettings", storages = [Storage("relative-actions.xml")])
+class AppSettings : SerializablePersistentStateComponent<AppSettings.State>(State()) {
+    var caretBackground: Color
         get() = state.caretBackground
+        set(value) {
+            updateState { it.copy(caretBackground = value) }
+        }
 
-    val keyDirectionUp
+    var keyDirectionUp: Char
         get() = state.keyDirectionUp
+        set(value) {
+            updateState { it.copy(keyDirectionUp = value) }
+        }
 
-    val keyDirectionDown
+    var keyDirectionDown: Char
         get() = state.keyDirectionDown
+        set(value) {
+            updateState { it.copy(keyDirectionDown = value) }
+        }
 
-    val keyDirectionBoth
+    var keyDirectionBoth: Char
         get() = state.keyDirectionBoth
+        set(value) {
+            updateState { it.copy(keyDirectionBoth = value) }
+        }
 
-    val keyActionComment
+    var keyActionComment: Char
         get() = state.keyActionComment
+        set(value) {
+            updateState { it.copy(keyActionComment = value) }
+        }
 
-    val keyActionCopy
+    var keyActionCopy: Char
         get() = state.keyActionCopy
+        set(value) {
+            updateState { it.copy(keyActionCopy = value) }
+        }
 
-    val keyActionCut
+    var keyActionCut: Char
         get() = state.keyActionCut
+        set(value) {
+            updateState { it.copy(keyActionCut = value) }
+        }
 
-    val keyActionDelete
+    var keyActionDelete: Char
         get() = state.keyActionDelete
+        set(value) {
+            updateState { it.copy(keyActionDelete = value) }
+        }
 
-    val keyActionSelect
+    var keyActionSelect: Char
         get() = state.keyActionSelect
+        set(value) {
+            updateState { it.copy(keyActionSelect = value) }
+        }
 
-    val keyPositionBeginning
+    var keyPositionBeginning: Char
         get() = state.keyPositionBeginning
+        set(value) {
+            updateState { it.copy(keyPositionBeginning = value) }
+        }
 
-    val keyPositionEnd
+    var keyPositionEnd: Char
         get() = state.keyPositionEnd
-
-    private var state: State = State()
-
-    override fun getState(): State = state
-
-    override fun loadState(state: State) {
-        this.state = state
-    }
+        set(value) {
+            updateState { it.copy(keyPositionEnd = value) }
+        }
 
     data class State(
-        var caretBackground: Color = JBColor.MAGENTA,
+        @OptionTag(converter = ColorConverter::class)
+        var caretBackground: Color = Color.MAGENTA,
+        @OptionTag(converter = CharConverter::class)
         var keyDirectionUp: Char = 'k',
+        @OptionTag(converter = CharConverter::class)
         var keyDirectionDown: Char = 'l',
+        @OptionTag(converter = CharConverter::class)
         var keyDirectionBoth: Char = 'b',
+        @OptionTag(converter = CharConverter::class)
         var keyActionComment: Char = 'c',
+        @OptionTag(converter = CharConverter::class)
         var keyActionCopy: Char = 'y',
+        @OptionTag(converter = CharConverter::class)
         var keyActionCut: Char = 'x',
+        @OptionTag(converter = CharConverter::class)
         var keyActionDelete: Char = 'd',
+        @OptionTag(converter = CharConverter::class)
         var keyActionSelect: Char = 's',
+        @OptionTag(converter = CharConverter::class)
         var keyPositionBeginning: Char = 'w',
+        @OptionTag(converter = CharConverter::class)
         var keyPositionEnd: Char = 'e',
     )
+
+    class CharConverter : Converter<Char>() {
+        override fun fromString(value: String): Char = value.first()
+
+        override fun toString(value: Char): String = value.toString()
+    }
+
+    class ColorConverter : Converter<Color>() {
+        override fun fromString(value: String): Color {
+            val hexString = value.removePrefix("#")
+            val rgb = hexString.toInt(16)
+
+            return Color(rgb)
+        }
+
+        override fun toString(value: Color): String = "#%06X".format(value.rgb and 0xFFFFFF)
+    }
 }

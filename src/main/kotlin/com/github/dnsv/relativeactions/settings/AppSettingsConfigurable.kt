@@ -3,41 +3,42 @@ package com.github.dnsv.relativeactions.settings
 import com.github.dnsv.relativeactions.keymap.Direction
 import com.github.dnsv.relativeactions.keymap.Position
 import com.github.dnsv.relativeactions.keymap.RelativeAction
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.options.Configurable
 
 class AppSettingsConfigurable : Configurable {
     private val panel by lazy { AppSettingsComponent() }
-    private val state get() = AppSettings.getInstance().state
+    private val settings get() = ApplicationManager.getApplication().getService(AppSettings::class.java)
 
     override fun createComponent() = panel.mainPanel
 
     override fun getDisplayName() = "Relative Actions"
 
     override fun isModified(): Boolean =
-        state.caretBackground != panel.caretBackground ||
-            state.keyDirectionUp != panel.keyDirectionUp ||
-            state.keyDirectionDown != panel.keyDirectionDown ||
-            state.keyDirectionBoth != panel.keyDirectionBoth ||
-            state.keyActionComment != panel.keyActionComment ||
-            state.keyActionCopy != panel.keyActionCopy ||
-            state.keyActionCut != panel.keyActionCut ||
-            state.keyActionDelete != panel.keyActionDelete ||
-            state.keyActionSelect != panel.keyActionSelect ||
-            state.keyPositionBeginning != panel.keyPositionBeginning ||
-            state.keyPositionEnd != panel.keyPositionEnd
+        settings.caretBackground != panel.caretBackground ||
+            settings.keyDirectionUp != panel.keyDirectionUp ||
+            settings.keyDirectionDown != panel.keyDirectionDown ||
+            settings.keyDirectionBoth != panel.keyDirectionBoth ||
+            settings.keyActionComment != panel.keyActionComment ||
+            settings.keyActionCopy != panel.keyActionCopy ||
+            settings.keyActionCut != panel.keyActionCut ||
+            settings.keyActionDelete != panel.keyActionDelete ||
+            settings.keyActionSelect != panel.keyActionSelect ||
+            settings.keyPositionBeginning != panel.keyPositionBeginning ||
+            settings.keyPositionEnd != panel.keyPositionEnd
 
     override fun apply() {
-        state.caretBackground = panel.caretBackground
-        state.keyDirectionUp = panel.keyDirectionUp
-        state.keyDirectionDown = panel.keyDirectionDown
-        state.keyDirectionBoth = panel.keyDirectionBoth
-        state.keyActionComment = panel.keyActionComment
-        state.keyActionCopy = panel.keyActionCopy
-        state.keyActionCut = panel.keyActionCut
-        state.keyActionDelete = panel.keyActionDelete
-        state.keyActionSelect = panel.keyActionSelect
-        state.keyPositionBeginning = panel.keyPositionBeginning
-        state.keyPositionEnd = panel.keyPositionEnd
+        settings.caretBackground = panel.caretBackground
+        settings.keyDirectionUp = panel.keyDirectionUp
+        settings.keyDirectionDown = panel.keyDirectionDown
+        settings.keyDirectionBoth = panel.keyDirectionBoth
+        settings.keyActionComment = panel.keyActionComment
+        settings.keyActionCopy = panel.keyActionCopy
+        settings.keyActionCut = panel.keyActionCut
+        settings.keyActionDelete = panel.keyActionDelete
+        settings.keyActionSelect = panel.keyActionSelect
+        settings.keyPositionBeginning = panel.keyPositionBeginning
+        settings.keyPositionEnd = panel.keyPositionEnd
 
         Direction.invalidateCache()
         RelativeAction.invalidateCache()
@@ -45,16 +46,16 @@ class AppSettingsConfigurable : Configurable {
     }
 
     override fun reset() {
-        panel.caretBackground = state.caretBackground
-        panel.keyDirectionUp = state.keyDirectionUp
-        panel.keyDirectionDown = state.keyDirectionDown
-        panel.keyDirectionBoth = state.keyDirectionBoth
-        panel.keyActionComment = state.keyActionComment
-        panel.keyActionCopy = state.keyActionCopy
-        panel.keyActionCut = state.keyActionCut
-        panel.keyActionDelete = state.keyActionDelete
-        panel.keyActionSelect = state.keyActionSelect
-        panel.keyPositionBeginning = state.keyPositionBeginning
-        panel.keyPositionEnd = state.keyPositionEnd
+        panel.caretBackground = settings.caretBackground
+        panel.keyDirectionUp = settings.keyDirectionUp
+        panel.keyDirectionDown = settings.keyDirectionDown
+        panel.keyDirectionBoth = settings.keyDirectionBoth
+        panel.keyActionComment = settings.keyActionComment
+        panel.keyActionCopy = settings.keyActionCopy
+        panel.keyActionCut = settings.keyActionCut
+        panel.keyActionDelete = settings.keyActionDelete
+        panel.keyActionSelect = settings.keyActionSelect
+        panel.keyPositionBeginning = settings.keyPositionBeginning
+        panel.keyPositionEnd = settings.keyPositionEnd
     }
 }

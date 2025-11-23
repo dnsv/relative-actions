@@ -1,6 +1,7 @@
 package com.github.dnsv.relativeactions.session
 
 import com.github.dnsv.relativeactions.settings.AppSettings
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.EditorColors.CARET_COLOR
 import com.intellij.openapi.editor.colors.impl.AbstractColorsScheme
@@ -20,9 +21,11 @@ internal data class RelativeActionCaret(
     }
 
     fun activate() {
+        val settings = ApplicationManager.getApplication().getService(AppSettings::class.java)
+
         editor.settings.isBlockCursor = true
         editor.settings.isBlinkCaret = false
-        editor.colorsScheme.setColor(CARET_COLOR, AppSettings.getInstance().caretBackground)
+        editor.colorsScheme.setColor(CARET_COLOR, settings.caretBackground)
     }
 
     fun restore() {
