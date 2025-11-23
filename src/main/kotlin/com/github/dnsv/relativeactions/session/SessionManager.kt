@@ -19,7 +19,13 @@ object SessionManager : SessionListener {
 
         if (isActive()) end()
 
-        session = Session(editor, this)
+        val project = editor.project
+
+        if (project == null || project.isDisposed) {
+            return
+        }
+
+        session = Session(editor, this, project)
     }
 
     fun restart(editor: Editor) = start(editor)

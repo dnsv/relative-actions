@@ -11,6 +11,7 @@ import com.intellij.openapi.util.Disposer
 class Session(
     val editor: Editor,
     private val listener: SessionListener,
+    parentDisposable: Disposable,
 ) : Disposable {
     private val sessionDisposable: Disposable
     private val relativeActionCaret = RelativeActionCaret.create(editor)
@@ -27,7 +28,7 @@ class Session(
             }
         }
 
-        sessionDisposable = Disposer.newDisposable(this)
+        sessionDisposable = Disposer.newDisposable(parentDisposable)
         EditorFactory.getInstance().addEditorFactoryListener(
             object : EditorFactoryListener {
                 override fun editorReleased(event: EditorFactoryEvent) {
