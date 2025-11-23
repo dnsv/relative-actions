@@ -4,23 +4,24 @@ package com.github.dnsv.relativeactions.settings
 
 import com.github.dnsv.relativeactions.settings.components.KeyCaptureField
 import com.github.dnsv.relativeactions.settings.components.ResettableColorPicker
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.ui.dsl.builder.*
 import javax.swing.JPanel
 
 class AppSettingsComponent {
-    private val defaults = AppSettings.State()
+    private val settings get() = ApplicationManager.getApplication().getService(AppSettings::class.java)
 
-    private val caretBackgroundPicker = ResettableColorPicker(defaults.caretBackground)
-    private val keyDirectionUpField = KeyCaptureField(defaults.keyDirectionUp)
-    private val keyDirectionDownField = KeyCaptureField(defaults.keyDirectionDown)
-    private val keyDirectionBothField = KeyCaptureField(defaults.keyDirectionBoth)
-    private val keyActionCommentField = KeyCaptureField(defaults.keyActionComment)
-    private val keyActionCopyField = KeyCaptureField(defaults.keyActionCopy)
-    private val keyActionCutField = KeyCaptureField(defaults.keyActionCut)
-    private val keyActionDeleteField = KeyCaptureField(defaults.keyActionDelete)
-    private val keyActionSelectField = KeyCaptureField(defaults.keyActionSelect)
-    private val keyPositionBeginningField = KeyCaptureField(defaults.keyPositionBeginning)
-    private val keyPositionEndField = KeyCaptureField(defaults.keyPositionEnd)
+    private val caretBackgroundPicker = ResettableColorPicker(settings.caretBackground)
+    private val keyDirectionUpField = KeyCaptureField(settings.keyDirectionUp)
+    private val keyDirectionDownField = KeyCaptureField(settings.keyDirectionDown)
+    private val keyDirectionBothField = KeyCaptureField(settings.keyDirectionBoth)
+    private val keyActionCommentField = KeyCaptureField(settings.keyActionComment)
+    private val keyActionCopyField = KeyCaptureField(settings.keyActionCopy)
+    private val keyActionCutField = KeyCaptureField(settings.keyActionCut)
+    private val keyActionDeleteField = KeyCaptureField(settings.keyActionDelete)
+    private val keyActionSelectField = KeyCaptureField(settings.keyActionSelect)
+    private val keyPositionBeginningField = KeyCaptureField(settings.keyPositionBeginning)
+    private val keyPositionEndField = KeyCaptureField(settings.keyPositionEnd)
 
     internal val mainPanel: JPanel =
         panel {

@@ -1,5 +1,6 @@
 package com.github.dnsv.relativeactions.keymap
 
+import com.intellij.openapi.application.ApplicationManager
 import com.github.dnsv.relativeactions.settings.AppSettings
 
 enum class Direction {
@@ -10,7 +11,7 @@ enum class Direction {
 
     companion object : AbstractKeymapEnum<Direction>() {
         override fun createKeymap(): Map<Char, Direction> {
-            val settings = AppSettings.getInstance()
+            val settings = ApplicationManager.getApplication().getService(AppSettings::class.java)
 
             return mapOf(
                 settings.keyDirectionUp to UP,

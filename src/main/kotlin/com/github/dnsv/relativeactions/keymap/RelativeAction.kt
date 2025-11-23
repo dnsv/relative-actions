@@ -1,6 +1,7 @@
 package com.github.dnsv.relativeactions.keymap
 
 import com.github.dnsv.relativeactions.settings.AppSettings
+import com.intellij.openapi.application.ApplicationManager
 
 enum class RelativeAction {
     COMMENT,
@@ -13,7 +14,7 @@ enum class RelativeAction {
 
     companion object : AbstractKeymapEnum<RelativeAction>() {
         override fun createKeymap(): Map<Char, RelativeAction> {
-            val settings = AppSettings.getInstance()
+            val settings = ApplicationManager.getApplication().getService(AppSettings::class.java)
 
             return mapOf(
                 settings.keyActionComment to COMMENT,
