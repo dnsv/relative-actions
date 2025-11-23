@@ -1,7 +1,7 @@
 package com.github.dnsv.relativeactions.keymap
 
-import com.intellij.openapi.application.ApplicationManager
 import com.github.dnsv.relativeactions.settings.AppSettings
+import com.intellij.openapi.application.ApplicationManager
 
 enum class Direction {
     UP,
