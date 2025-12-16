@@ -5,6 +5,7 @@
 ## [Unreleased]
 
 - Swap default direction keys for UP and DOWN ([#45](https://github.com/dnsv/relative-actions/pull/45))
+- Remove untilBuild to support future IDE versions by default ([#46](https://github.com/dnsv/relative-actions/pull/46))
 
 ## [1.2.1] - 2025-11-23
 
