@@ -37,18 +37,18 @@ K</kbd> on Windows/Linux). The caret will change color to indicate that Relative
 You can now perform a command relative to your current line. Commands follow a simple pattern: you specify *what* to do,
 *how many* lines, and in *which direction*. For example:
 
-- **Move only**: Just specify a line number and direction (e.g., `5k` to move 5 lines up).
-- **Move to the beginning/end of a line**: Also specify a position (e.g., `3ek` to move 3 lines up and to the end of the
+- **Move only**: Just specify a line number and direction (e.g., `5l` to move 5 lines up).
+- **Move to the beginning/end of a line**: Also specify a position (e.g., `3el` to move 3 lines up and to the end of the
   line).
-- **Perform an action**: Specify a line number, action and direction (e.g., `3ck` to comment 3 lines up).
-- **Work with ranges**: Use a comma to specify a range of lines (e.g., `2,5dl` to delete lines 2 through 5 below
+- **Perform an action**: Specify a line number, action and direction (e.g., `3cl` to comment 3 lines up).
+- **Work with ranges**: Use a comma to specify a range of lines (e.g., `2,5dk` to delete lines 2 through 5 below
   the current line).
 
 More examples:
-- `6l`: Move 6 lines down
-- `3dl`: Delete 3 lines down
-- `10,5sk` Select lines 5 through 10 above the current line
-- `5,cl`: Comment only the 5th line below the current line
+- `6k`: Move 6 lines down
+- `3dk`: Delete 3 lines down
+- `10,5sl` Select lines 5 through 10 above the current line
+- `5,ck`: Comment only the 5th line below the current line
 - `3,5xb`: Cut 3 lines above and 5 below the current line
 
 > [!NOTE]
@@ -60,7 +60,7 @@ More examples:
 > The order of the numbers in a range doesn't matter. For example, `5,2ck` is equivalent to `2,5ck`.
 >
 > To perform an action only on one line that's not the current line, e.g., to comment the third line above the current
-> line, you can use `3,ck`, which is a shortcut for `3,3ck`.
+> line, you can use `3,cl`, which is a shortcut for `3,3cl`.
 
 ### Key Bindings
 
@@ -68,8 +68,8 @@ The following table shows all available keys you can use to build commands:
 
 | Key | Operation                                                 |
 |-----|-----------------------------------------------------------|
-| `k` | Direction: Up                                             |
-| `l` | Direction: Down                                           |
+| `k` | Direction: Down                                           |
+| `l` | Direction: Up                                             |
 | `b` | Direction: Bidirectional (only applicable with an action) |
 | `w` | Position: Beginning of line (only applicable with *move*) |
 | `e` | Position: End of line (only applicable with *move*)       |
