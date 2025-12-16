@@ -15,34 +15,34 @@ class RelativeActionCutTest : BaseTestCase() {
         fun caretPositionProvider(): Stream<Arguments> =
             Stream.of(
                 // Cut up - caret moves to first line of cut text
-                Arguments.of(LogicalPosition(3, 9), "x2k", LogicalPosition(1, 0)),
+                Arguments.of(LogicalPosition(3, 9), "x2l", LogicalPosition(1, 0)),
                 // Cut down - caret moves to start of current line
-                Arguments.of(LogicalPosition(3, 9), "x2l", LogicalPosition(3, 0)),
+                Arguments.of(LogicalPosition(3, 9), "x2k", LogicalPosition(3, 0)),
                 // Cut both - caret moves to first line of cut range
                 Arguments.of(LogicalPosition(3, 9), "x1,2b", LogicalPosition(2, 0)),
                 // Cut above the current line - caret remains unchanged
-                Arguments.of(LogicalPosition(5, 9), "x2,1k", LogicalPosition(3, 9)),
+                Arguments.of(LogicalPosition(5, 9), "x2,1l", LogicalPosition(3, 9)),
                 // Cut below the current line - caret remains unchanged
-                Arguments.of(LogicalPosition(3, 9), "x1,2l", LogicalPosition(3, 9)),
+                Arguments.of(LogicalPosition(3, 9), "x1,2k", LogicalPosition(3, 9)),
             )
     }
 
     @ParameterizedTest
     @CsvSource(
         // Cut down without a number copies the current line
-        "xl, '1\n2\n3\n4\n6\n7\n8\n9\n10\n', '5\n'",
-        // Cut 3 lines down
-        "x3l, '1\n2\n3\n4\n9\n10\n', '5\n6\n7\n8\n'",
-        // Same as above, but with reversed command order (order doesn't matter)
-        "3xl, '1\n2\n3\n4\n9\n10\n', '5\n6\n7\n8\n'",
-        // Cut down beyond the last line — copies all to the end
-        "x10l, '1\n2\n3\n4\n', '5\n6\n7\n8\n9\n10\n'",
-        // Cut up without a number copies the current line
         "xk, '1\n2\n3\n4\n6\n7\n8\n9\n10\n', '5\n'",
+        // Cut 3 lines down
+        "x3k, '1\n2\n3\n4\n9\n10\n', '5\n6\n7\n8\n'",
+        // Same as above, but with reversed command order (order doesn't matter)
+        "3xk, '1\n2\n3\n4\n9\n10\n', '5\n6\n7\n8\n'",
+        // Cut down beyond the last line — copies all to the end
+        "x10k, '1\n2\n3\n4\n', '5\n6\n7\n8\n9\n10\n'",
+        // Cut up without a number copies the current line
+        "xl, '1\n2\n3\n4\n6\n7\n8\n9\n10\n', '5\n'",
         // Cut 2 lines up
-        "x2k, '1\n2\n6\n7\n8\n9\n10\n', '3\n4\n5\n'",
+        "x2l, '1\n2\n6\n7\n8\n9\n10\n', '3\n4\n5\n'",
         // Cut up beyond the first line — copies all to the top
-        "x10k, '6\n7\n8\n9\n10\n', '1\n2\n3\n4\n5\n'",
+        "x10l, '6\n7\n8\n9\n10\n', '1\n2\n3\n4\n5\n'",
     )
     fun `test basic cut text`(
         command: String,
@@ -63,15 +63,15 @@ class RelativeActionCutTest : BaseTestCase() {
         // Cut lines in both directions
         "'x3,2b', '1\n8\n9\n10\n', '2\n3\n4\n5\n6\n7\n'",
         // Cut lines 1 through 3 below the current line
-        "'x1,3l', '1\n2\n3\n4\n5\n9\n10\n', '6\n7\n8\n'",
+        "'x1,3k', '1\n2\n3\n4\n5\n9\n10\n', '6\n7\n8\n'",
         // Same as above, but with reversed command order (order doesn't matter)
-        "'3,1xl', '1\n2\n3\n4\n5\n9\n10\n', '6\n7\n8\n'",
+        "'3,1xk', '1\n2\n3\n4\n5\n9\n10\n', '6\n7\n8\n'",
         // Cut lines 2 through 10 below the current line (caps at file end)
-        "'x2,10l', '1\n2\n3\n4\n5\n6\n', '7\n8\n9\n10\n'",
+        "'x2,10k', '1\n2\n3\n4\n5\n6\n', '7\n8\n9\n10\n'",
         // Cut lines 1 through 3 above the current line
-        "'x3,1k', '1\n5\n6\n7\n8\n9\n10\n', '2\n3\n4\n'",
+        "'x3,1l', '1\n5\n6\n7\n8\n9\n10\n', '2\n3\n4\n'",
         // Cut lines 3 through 10 above the current line (caps at file start)
-        "'x10,3k', '3\n4\n5\n6\n7\n8\n9\n10\n', '1\n2\n'",
+        "'x10,3l', '3\n4\n5\n6\n7\n8\n9\n10\n', '1\n2\n'",
     )
     fun `test multi-line cut text`(
         command: String,
@@ -117,7 +117,7 @@ class RelativeActionCutTest : BaseTestCase() {
         moveCaret(LogicalPosition(4, 0)) // At "5\n"
 
         // Copy line 3 above the current line
-        performCommand("3,xk")
+        performCommand("3,xl")
 
         assertText("1\n3\n4\n5\n6\n7\n8\n9\n10\n")
         assertClipboard("2\n")

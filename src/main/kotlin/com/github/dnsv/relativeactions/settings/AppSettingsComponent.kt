@@ -12,8 +12,8 @@ class AppSettingsComponent {
     private val settings get() = ApplicationManager.getApplication().getService(AppSettings::class.java)
 
     private val caretBackgroundPicker = ResettableColorPicker(settings.caretBackground)
-    private val keyDirectionUpField = KeyCaptureField(settings.keyDirectionUp)
     private val keyDirectionDownField = KeyCaptureField(settings.keyDirectionDown)
+    private val keyDirectionUpField = KeyCaptureField(settings.keyDirectionUp)
     private val keyDirectionBothField = KeyCaptureField(settings.keyDirectionBoth)
     private val keyActionCommentField = KeyCaptureField(settings.keyActionComment)
     private val keyActionCopyField = KeyCaptureField(settings.keyActionCopy)
@@ -30,8 +30,8 @@ class AppSettingsComponent {
             }
 
             group("Direction") {
-                row("Up:") { cell(keyDirectionUpField) }
                 row("Down:") { cell(keyDirectionDownField) }
+                row("Up:") { cell(keyDirectionUpField) }
                 row("Both:") { cell(keyDirectionBothField) }
             }
 
@@ -55,16 +55,16 @@ class AppSettingsComponent {
             caretBackgroundPicker.selectedColor = value
         }
 
-    var keyDirectionUp
-        get() = keyDirectionUpField.selectedKey
-        set(value) {
-            keyDirectionUpField.selectedKey = value
-        }
-
     var keyDirectionDown
         get() = keyDirectionDownField.selectedKey
         set(value) {
             keyDirectionDownField.selectedKey = value
+        }
+
+    var keyDirectionUp
+        get() = keyDirectionUpField.selectedKey
+        set(value) {
+            keyDirectionUpField.selectedKey = value
         }
 
     var keyDirectionBoth

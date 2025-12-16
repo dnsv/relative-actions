@@ -12,19 +12,19 @@ class RelativeActionCopyTest : BaseTestCase() {
     @ParameterizedTest
     @CsvSource(
         // Copy down without a number copies the current line
-        "yl, '5\n'",
-        // Copy 3 lines down
-        "y3l, '5\n6\n7\n8\n'",
-        // Same as above, but with reversed command order (order doesn't matter)
-        "3yl, '5\n6\n7\n8\n'",
-        // Copy down beyond the last line — copies all to the end
-        "y10l, '5\n6\n7\n8\n9\n10\n'",
-        // Copy up without a number copies the current line
         "yk, '5\n'",
+        // Copy 3 lines down
+        "y3k, '5\n6\n7\n8\n'",
+        // Same as above, but with reversed command order (order doesn't matter)
+        "3yk, '5\n6\n7\n8\n'",
+        // Copy down beyond the last line — copies all to the end
+        "y10k, '5\n6\n7\n8\n9\n10\n'",
+        // Copy up without a number copies the current line
+        "yl, '5\n'",
         // Copy 2 lines up
-        "y2k, '3\n4\n5\n'",
+        "y2l, '3\n4\n5\n'",
         // Copy up beyond the first line — copies all to the top
-        "y10k, '1\n2\n3\n4\n5\n'",
+        "y10l, '1\n2\n3\n4\n5\n'",
     )
     fun `test basic copy text`(
         command: String,
@@ -43,15 +43,15 @@ class RelativeActionCopyTest : BaseTestCase() {
         // Copy lines in both directions
         "'y3,2b', '2\n3\n4\n5\n6\n7\n'",
         // Copy lines 1 through 3 below the current line
-        "'y1,3l', '6\n7\n8\n'",
+        "'y1,3k', '6\n7\n8\n'",
         // Same as above, but with reversed command order (order doesn't matter)
-        "'3,1yl', '6\n7\n8\n'",
+        "'3,1yk', '6\n7\n8\n'",
         // Copy lines 2 through 10 below the current line (caps at file end)
-        "'y2,10l', '7\n8\n9\n10\n'",
+        "'y2,10k', '7\n8\n9\n10\n'",
         // Copy lines 1 through 3 above the current line
-        "'y3,1k', '2\n3\n4\n'",
+        "'y3,1l', '2\n3\n4\n'",
         // Copy lines 3 through 10 above the current line (caps at file start)
-        "'y10,3k', '1\n2\n'",
+        "'y10,3l', '1\n2\n'",
     )
     fun `test multi-line copy text`(
         command: String,
@@ -71,7 +71,7 @@ class RelativeActionCopyTest : BaseTestCase() {
         moveCaret(LogicalPosition(4, 0)) // At "5\n"
 
         // Copy line 3 above the current line
-        performCommand("3,yk")
+        performCommand("3,yl")
 
         assertClipboard("2\n")
     }
@@ -82,7 +82,7 @@ class RelativeActionCopyTest : BaseTestCase() {
         moveCaret(LogicalPosition(4, 0)) // At "5\n"
 
         // Copy 3 lines down
-        performCommand("y3l")
+        performCommand("y3k")
 
         val editor = getEditor()
         val highlighters = editor.markupModel.allHighlighters.toList()

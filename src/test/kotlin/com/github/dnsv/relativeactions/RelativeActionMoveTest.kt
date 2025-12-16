@@ -14,32 +14,32 @@ class RelativeActionMoveTest : BaseTestCase() {
         fun moveCaretLinePositionProvider(): Stream<Arguments> =
             Stream.of(
                 // Move down without a number leaves the caret on the same line
-                Arguments.of(LogicalPosition(4, 0), "l", LogicalPosition(4, 0)),
-                // Move down by N lines
-                Arguments.of(LogicalPosition(4, 0), "3l", LogicalPosition(7, 0)),
-                // Move down beyond the last line places the caret on the last line
-                Arguments.of(LogicalPosition(4, 0), "10l", LogicalPosition(10, 0)),
-                // Move up by N lines
-                Arguments.of(LogicalPosition(4, 0), "2k", LogicalPosition(2, 0)),
-                // Move up without a number leaves the caret on the same line
                 Arguments.of(LogicalPosition(4, 0), "k", LogicalPosition(4, 0)),
+                // Move down by N lines
+                Arguments.of(LogicalPosition(4, 0), "3k", LogicalPosition(7, 0)),
+                // Move down beyond the last line places the caret on the last line
+                Arguments.of(LogicalPosition(4, 0), "10k", LogicalPosition(10, 0)),
+                // Move up by N lines
+                Arguments.of(LogicalPosition(4, 0), "2l", LogicalPosition(2, 0)),
+                // Move up without a number leaves the caret on the same line
+                Arguments.of(LogicalPosition(4, 0), "l", LogicalPosition(4, 0)),
                 // Move up beyond the first line places the caret on the first line
-                Arguments.of(LogicalPosition(4, 0), "10k", LogicalPosition(0, 0)),
+                Arguments.of(LogicalPosition(4, 0), "10l", LogicalPosition(0, 0)),
             )
 
         @JvmStatic
         fun moveCaretColumnPositionProvider(): Stream<Arguments> =
             Stream.of(
                 // Caret stays on the same column if the new line is at least as long
-                Arguments.of(LogicalPosition(0, 8), "1l", LogicalPosition(1, 8)),
+                Arguments.of(LogicalPosition(0, 8), "1k", LogicalPosition(1, 8)),
                 // Caret moves to end of line if the new line is shorter
-                Arguments.of(LogicalPosition(2, 35), "1k", LogicalPosition(1, 26)),
+                Arguments.of(LogicalPosition(2, 35), "1l", LogicalPosition(1, 26)),
                 // Caret moves to the start of the new line
-                Arguments.of(LogicalPosition(2, 10), "1wk", LogicalPosition(1, 0)),
+                Arguments.of(LogicalPosition(2, 10), "1wl", LogicalPosition(1, 0)),
                 // Caret moves to the end of the new line
-                Arguments.of(LogicalPosition(1, 10), "1el", LogicalPosition(2, 39)),
+                Arguments.of(LogicalPosition(1, 10), "1ek", LogicalPosition(2, 39)),
                 // Caret moves to the start of the text of the new line
-                Arguments.of(LogicalPosition(1, 0), "1wl", LogicalPosition(2, 4)),
+                Arguments.of(LogicalPosition(1, 0), "1wk", LogicalPosition(2, 4)),
             )
     }
 
@@ -83,7 +83,7 @@ class RelativeActionMoveTest : BaseTestCase() {
     fun `test move caret ignores separator`() {
         makeEditor("0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n")
 
-        performCommand("3,l")
+        performCommand("3,k")
 
         assertCaretPosition(LogicalPosition(0, 0))
     }

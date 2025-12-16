@@ -19,16 +19,16 @@ class AppSettings : SerializablePersistentStateComponent<AppSettings.State>(Stat
             updateState { it.copy(caretBackground = value) }
         }
 
-    var keyDirectionUp: Char
-        get() = state.keyDirectionUp
-        set(value) {
-            updateState { it.copy(keyDirectionUp = value) }
-        }
-
     var keyDirectionDown: Char
         get() = state.keyDirectionDown
         set(value) {
             updateState { it.copy(keyDirectionDown = value) }
+        }
+
+    var keyDirectionUp: Char
+        get() = state.keyDirectionUp
+        set(value) {
+            updateState { it.copy(keyDirectionUp = value) }
         }
 
     var keyDirectionBoth: Char
@@ -83,9 +83,9 @@ class AppSettings : SerializablePersistentStateComponent<AppSettings.State>(Stat
         @OptionTag(converter = ColorConverter::class)
         var caretBackground: Color = Color.MAGENTA,
         @OptionTag(converter = CharConverter::class)
-        var keyDirectionUp: Char = 'k',
+        var keyDirectionDown: Char = 'k',
         @OptionTag(converter = CharConverter::class)
-        var keyDirectionDown: Char = 'l',
+        var keyDirectionUp: Char = 'l',
         @OptionTag(converter = CharConverter::class)
         var keyDirectionBoth: Char = 'b',
         @OptionTag(converter = CharConverter::class)

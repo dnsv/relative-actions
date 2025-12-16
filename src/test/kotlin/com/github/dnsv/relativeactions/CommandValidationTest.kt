@@ -30,10 +30,10 @@ class CommandValidationTest : BaseTestCase() {
     fun `test cannot use beginning of line key with an action`() {
         makeEditor("")
 
-        performCommand("wcl")
+        performCommand("wck")
 
         Assertions.assertEquals(
-            "Invalid command 'wcl': 'w' (beginning of line) can only be used for movement.",
+            "Invalid command 'wck': 'w' (beginning of line) can only be used for movement.",
             getLastNotification().content,
         )
     }
@@ -42,10 +42,10 @@ class CommandValidationTest : BaseTestCase() {
     fun `test cannot use end of line key with an action`() {
         makeEditor("")
 
-        performCommand("edl")
+        performCommand("edk")
 
         Assertions.assertEquals(
-            "Invalid command 'edl': 'e' (end of line) can only be used for movement.",
+            "Invalid command 'edk': 'e' (end of line) can only be used for movement.",
             getLastNotification().content,
         )
     }

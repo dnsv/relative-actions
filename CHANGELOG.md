@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Swap default direction keys for UP and DOWN ([#45](https://github.com/dnsv/relative-actions/pull/45))
+
 ## [1.2.1] - 2025-11-23
 
 - Fix settings not being persisted ([#34](https://github.com/dnsv/relative-actions/pull/34))
