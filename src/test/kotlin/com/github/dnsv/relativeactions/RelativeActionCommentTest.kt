@@ -19,10 +19,10 @@ class RelativeActionCommentTest : BaseTestCase() {
         fun caretPositionProvider(): Stream<Arguments> =
             Stream.of(
                 // Caret is moved by the amount of chars that the comment adds
-                Arguments.of(LogicalPosition(3, 9), "c2k", LogicalPosition(3, 12)),
+                Arguments.of(LogicalPosition(3, 9), "c2l", LogicalPosition(3, 12)),
                 Arguments.of(LogicalPosition(3, 9), "c1,2b", LogicalPosition(3, 12)),
                 // The caret stays as-is when it's not inside the comment selection
-                Arguments.of(LogicalPosition(5, 9), "c2,1k", LogicalPosition(5, 9)),
+                Arguments.of(LogicalPosition(5, 9), "c2,1l", LogicalPosition(5, 9)),
             )
     }
 
@@ -37,19 +37,19 @@ class RelativeActionCommentTest : BaseTestCase() {
     @ParameterizedTest
     @CsvSource(
         // Comment down without a number comments the current line
-        "cl, '1\n2\n3\n4\n// 5\n6\n7\n8\n9\n10\n'",
-        // Comment 2 lines down
-        "c2l, '1\n2\n3\n4\n// 5\n// 6\n// 7\n8\n9\n10\n'",
-        // Same as above, but with reversed command order (order doesn't matter)
-        "2cl, '1\n2\n3\n4\n// 5\n// 6\n// 7\n8\n9\n10\n'",
-        // Comment down beyond the last line — comments all to the end
-        "c10l, '1\n2\n3\n4\n// 5\n// 6\n// 7\n// 8\n// 9\n// 10\n'",
-        // Comment up without a number comments the current line
         "ck, '1\n2\n3\n4\n// 5\n6\n7\n8\n9\n10\n'",
+        // Comment 2 lines down
+        "c2k, '1\n2\n3\n4\n// 5\n// 6\n// 7\n8\n9\n10\n'",
+        // Same as above, but with reversed command order (order doesn't matter)
+        "2ck, '1\n2\n3\n4\n// 5\n// 6\n// 7\n8\n9\n10\n'",
+        // Comment down beyond the last line — comments all to the end
+        "c10k, '1\n2\n3\n4\n// 5\n// 6\n// 7\n// 8\n// 9\n// 10\n'",
+        // Comment up without a number comments the current line
+        "cl, '1\n2\n3\n4\n// 5\n6\n7\n8\n9\n10\n'",
         // Comment 3 lines up
-        "c3k, '1\n// 2\n// 3\n// 4\n// 5\n6\n7\n8\n9\n10\n'",
+        "c3l, '1\n// 2\n// 3\n// 4\n// 5\n6\n7\n8\n9\n10\n'",
         // Comment up beyond the first line — comments all to the top
-        "c10k, '// 1\n// 2\n// 3\n// 4\n// 5\n6\n7\n8\n9\n10\n'",
+        "c10l, '// 1\n// 2\n// 3\n// 4\n// 5\n6\n7\n8\n9\n10\n'",
     )
     fun `test basic comment text`(
         command: String,
@@ -68,15 +68,15 @@ class RelativeActionCommentTest : BaseTestCase() {
         // Comment lines in both directions
         "'c3,2b', '1\n// 2\n// 3\n// 4\n// 5\n// 6\n// 7\n8\n9\n10\n'",
         // Comment lines 1 through 3 below the current line
-        "'c1,3l', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n9\n10\n'",
+        "'c1,3k', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n9\n10\n'",
         // Same as above, but with reversed command order (order doesn't matter)
-        "'3,1cl', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n9\n10\n'",
+        "'3,1ck', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n9\n10\n'",
         // Comment lines 1 through 10 below the current line (caps at file end)
-        "'c1,10l', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n// 9\n// 10\n'",
+        "'c1,10k', '1\n2\n3\n4\n5\n// 6\n// 7\n// 8\n// 9\n// 10\n'",
         // Comment lines 1 through 3 above the current line
-        "'c3,1k', '1\n// 2\n// 3\n// 4\n5\n6\n7\n8\n9\n10\n'",
+        "'c3,1l', '1\n// 2\n// 3\n// 4\n5\n6\n7\n8\n9\n10\n'",
         // Comment lines 1 through 10 above the current line (caps at file start)
-        "'c10,1k', '// 1\n// 2\n// 3\n// 4\n5\n6\n7\n8\n9\n10\n'",
+        "'c10,1l', '// 1\n// 2\n// 3\n// 4\n5\n6\n7\n8\n9\n10\n'",
     )
     fun `test multi-line comment text`(
         command: String,
@@ -93,9 +93,9 @@ class RelativeActionCommentTest : BaseTestCase() {
     @ParameterizedTest
     @CsvSource(
         // Uncomment 2 lines down
-        "c2l, '1\n2\n3\n4\n5\n6\n7\n// 8\n// 9\n10\n'",
+        "c2k, '1\n2\n3\n4\n5\n6\n7\n// 8\n// 9\n10\n'",
         // Uncomment lines 1 through 3 below the current line
-        "'c1,3l', '1\n2\n3\n4\n// 5\n6\n7\n8\n// 9\n10\n'",
+        "'c1,3k', '1\n2\n3\n4\n// 5\n6\n7\n8\n// 9\n10\n'",
     )
     fun `test uncomment text`(
         command: String,
@@ -113,7 +113,7 @@ class RelativeActionCommentTest : BaseTestCase() {
         makeEditor("1\n2\n3\n4\n// 5\n6\n7\n8\n9\n10\n")
         moveCaret(LogicalPosition(4, 0)) // At "5\n"
 
-        performCommand("c1l")
+        performCommand("c1k")
 
         assertText("1\n2\n3\n4\n// // 5\n// 6\n7\n8\n9\n10\n")
     }
@@ -148,7 +148,7 @@ class RelativeActionCommentTest : BaseTestCase() {
         moveCaret(LogicalPosition(4, 0)) // At "5\n"
 
         // Comment line 3 below the current line
-        performCommand("c3,l")
+        performCommand("c3,k")
 
         assertText("1\n2\n3\n4\n5\n6\n7\n// 8\n9\n10\n")
     }
