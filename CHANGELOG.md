@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-12-17
+
 - Swap default direction keys for UP and DOWN ([#45](https://github.com/dnsv/relative-actions/pull/45))
 - Remove untilBuild to support future IDE versions by default ([#46](https://github.com/dnsv/relative-actions/pull/46))
 
@@ -25,7 +27,8 @@
 
 - Initial version.
 
-[Unreleased]: https://github.com/dnsv/relative-actions/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/dnsv/relative-actions/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/dnsv/relative-actions/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/dnsv/relative-actions/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/dnsv/relative-actions/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/dnsv/relative-actions/compare/v1.0.0...v1.1.0
