@@ -1,6 +1,7 @@
 package com.github.dnsv.relativeactions.relativeaction
 
 import com.github.dnsv.relativeactions.util.LineRange
+import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.colors.EditorColors
 import com.intellij.openapi.editor.colors.EditorColorsManager
@@ -8,6 +9,7 @@ import com.intellij.openapi.editor.markup.HighlighterLayer
 import com.intellij.openapi.editor.markup.HighlighterTargetArea
 import com.intellij.openapi.editor.markup.TextAttributes
 import com.intellij.openapi.ide.CopyPasteManager
+import com.intellij.openapi.util.Disposer
 import com.intellij.openapi.util.TextRange
 import com.intellij.util.Alarm
 import java.awt.datatransfer.StringSelection
@@ -55,8 +57,10 @@ class CopyRelativeAction(
             )
 
         // Remove highlight after a short delay
-        Alarm().addRequest({
+        val alarm = Alarm(editor.project ?: ApplicationManager.getApplication())
+        alarm.addRequest({
             editor.markupModel.removeHighlighter(highlighter)
+            Disposer.dispose(alarm)
         }, HIGHLIGH_DURATION_MS)
     }
 }

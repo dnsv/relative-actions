@@ -4,6 +4,8 @@
 
 ## [Unreleased]
 
+- Replace the deprecated `Alarm()` constructor with a lifecycle-aware `Alarm(Disposable)`
+
 ## [1.3.0] - 2025-12-17
 
 - Swap default direction keys for UP and DOWN ([#45](https://github.com/dnsv/relative-actions/pull/45))
