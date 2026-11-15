@@ -34,6 +34,7 @@ dependencies {
     testImplementation(libs.junit5.jupiter.api)
     testRuntimeOnly(libs.junit5.jupiter.engine)
     testImplementation(libs.junit5.jupiter.params)
+    testRuntimeOnly(libs.junit5.platform.launcher)
     // See https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-faq.html#junit5-test-framework-refers-to-junit4
     testRuntimeOnly(libs.junit4)
 
