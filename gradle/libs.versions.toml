@@ -8,7 +8,7 @@ junit4 = "4.13.2"
 changelog = "2.5.0"
 intelliJPlatform = "2.20.1"
 kotlin = "2.4.21"
-kover = "0.9.9"
+kover = "0.9.11"
 qodana = "2026.2.2"
 ktlint = "14.2.0"
 
